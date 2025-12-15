@@ -15,8 +15,13 @@
         
         public void Behave()
         {
-            if(m_Target == null)
+            if (!m_Target)
+            {
+                Debug.Log("Move Forward");
+                m_Controller.MoveForward();   
                 return;
+            }
+            
             m_Controller.MoveTowards(m_Target.position);
         }
     }

@@ -1,9 +1,7 @@
 ﻿namespace Script
 {
-    using System;
     using Behaviour;
     using KarpysDev.KarpysUtils;
-    using Unity.VisualScripting;
     using UnityEngine;
 
     public class BaseProjectile : MonoBehaviour,IController
@@ -32,6 +30,12 @@
         public void MoveTowards(Vector2 position)
         {
             Vector2 targetPosition = transform.position.Vec2() + (position - transform.position.Vec2()).normalized * (m_ProjectileSpeed * Time.fixedDeltaTime);
+            transform.position = targetPosition;
+        }
+
+        public void MoveForward()
+        {
+            Vector2 targetPosition = transform.position.Vec2() + transform.right.Vec2() * (m_ProjectileSpeed * Time.fixedDeltaTime);
             transform.position = targetPosition;
         }
 

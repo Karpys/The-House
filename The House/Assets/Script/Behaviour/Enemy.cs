@@ -36,6 +36,11 @@
             m_Rigidbody.MovePosition(targetPosition);
         }
 
+        public void MoveForward()
+        {
+            return;
+        }
+
         public void TakeDamage(float damage)
         {
             m_Life -= damage;
