@@ -3,12 +3,13 @@
     using Behaviour;
     using KarpysDev.KarpysUtils;
     using UnityEngine;
-    
+
     public class HouseBehaviour : MonoBehaviour
     {
         [SerializeField] private float m_Life = 100;
         [SerializeField] private float m_Range = 1;
         [SerializeField] private CircleCollider2D m_RangeTrigger = null;
+        [SerializeField] private RangeVisualIndicator m_RangeVisualIndicator = null;
         
         [Header("Damage")]
         [SerializeField] private float m_ProjectileDamage = 10;
@@ -24,12 +25,18 @@
         {
             m_SelfPosition = transform.position.Vec2();
             m_ShootClock = new Clock(m_AttackSpeed, TryShoot);
-            InitializeRange();
         }
 
-        private void InitializeRange()
+        private void OnDrawGizmos()
+        {
+            UpdateRange();
+        }
+
+        private void UpdateRange()
         {
             m_RangeTrigger.radius = m_Range;
+            m_RangeVisualIndicator.UpdateRange(m_Range);
+            m_RangeVisualIndicator.transform.localScale = Vector3.one * m_Range;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
