@@ -1,10 +1,9 @@
-Shader "Sprites/RangeCircle"
+Shader "Sprites/BaseSpriteShader"
 {
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Size("Size",float) = 0.1
-        _Color ("Fill Color", Color) = (0,0,0,1)
+        _Color ("Color", Color) = (1,1,1,1)
     }
     
     
@@ -25,7 +24,6 @@ Shader "Sprites/RangeCircle"
         ZWrite Off
         Blend One OneMinusSrcAlpha
 
-        
 
         Pass
         {
@@ -36,20 +34,10 @@ Shader "Sprites/RangeCircle"
             #pragma multi_compile_instancing
             #include "UnitySprites.cginc"
 
-            fixed _Size;
-
-
             fixed4 SpriteFragment(v2f i) : SV_Target
             {
-                float2 center = float2(0.5, 0.5);
-                float dist = distance(i.texcoord, center);
-
-                if(dist > 0.5 - _Size && dist < 0.5)
-                {
-                    return SpriteFrag(i);
-                }
-
-                return float4(0,0,0,0);
+                fixed4 color = SpriteFrag(i);
+                return color;
             }
         ENDCG
         }
