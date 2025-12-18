@@ -9,6 +9,7 @@
         [SerializeField] private Rigidbody2D m_Rigidbody = null;
         [SerializeField] private float m_Speed = 5f;
         [SerializeField] private float m_Life = 10f;
+        [SerializeField] private float m_AttackRange = 0.5f;
         
         private IBehave m_Behaviour = null;
 
@@ -30,10 +31,22 @@
             m_Rigidbody.MovePosition(position);
         }
 
-        public void MoveTowards(Vector2 position)
+        public void MoveTowards(Vector2 targetPosition)
         {
-            Vector2 targetPosition = transform.position.Vec2() + (position - transform.position.Vec2()).normalized * (m_Speed * Time.fixedDeltaTime); 
-            m_Rigidbody.MovePosition(targetPosition);
+            Vector2 currentPosition = transform.position.Vec2();
+            float distance = Vector2.Distance(currentPosition, targetPosition);
+
+            if (distance <= m_AttackRange)
+                return;
+
+            float maxStep = m_Speed * Time.fixedDeltaTime;
+            float distanceToMove = distance - m_AttackRange;
+            float step = Mathf.Min(maxStep, distanceToMove);
+
+            Vector2 direction = (targetPosition - currentPosition).normalized;
+            Vector2 nextMove = currentPosition + direction * step;
+
+            m_Rigidbody.MovePosition(nextMove);
         }
 
         public void MoveForward()

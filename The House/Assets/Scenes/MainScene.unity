@@ -769,7 +769,7 @@ MonoBehaviour:
   m_RangeVisualIndicator: {fileID: 895582802}
   m_ProjectileDamage: 10
   m_ProjectileSpeed: 10
-  m_AttackSpeed: 1
+  m_AttackSpeed: 100
   m_ProjectilePrefab: {fileID: 6939513257241455983, guid: e790e153ebe05f04dab217270e068d57, type: 3}
 --- !u!1 &1551556534
 GameObject:
