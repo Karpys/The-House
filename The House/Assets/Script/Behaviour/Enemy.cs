@@ -1,31 +1,55 @@
 ﻿namespace Script.Behaviour
 {
-    using System.Security.Cryptography;
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
-    public class Enemy : MonoBehaviour,IController,ITarget,IDamageable
+    public class EnemyAttack
+    {
+        private bool m_InAttack = false;
+        private Enemy m_Enemy = null;
+        public bool InAttack => m_InAttack;
+        public EnemyAttack(Enemy enemy)
+        {
+            m_Enemy = enemy;
+        }
+
+        public void Attack(Transform target)
+        {
+            m_InAttack = true;
+            IDamageable damageable = target.GetComponent<IDamageable>();
+        }
+    }
+    public class Enemy : MonoBehaviour,ITarget,IDamageable
     {
         [SerializeField] private Rigidbody2D m_Rigidbody = null;
         [SerializeField] private float m_Speed = 5f;
         [SerializeField] private float m_Life = 10f;
         [SerializeField] private float m_AttackRange = 0.5f;
         
-        private IBehave m_Behaviour = null;
-
         public Transform Transform => transform;
         public Vector2 Position => transform.position.Vec2();
 
+        private EnemyAttack m_DefaultAttack = null;
+        private Transform m_Target = null;
         private void Awake()
         {
-            m_Behaviour = new MoveTowardsTarget(GameManager.Instance.House, this);
+            m_DefaultAttack = new EnemyAttack(this);
+            m_Target = GameManager.Instance.House;
         }
 
         private void FixedUpdate()
         {
-            m_Behaviour.Behave();
+            Behave();
         }
-        
+
+        private void Behave()
+        {
+            if (m_Target && !m_DefaultAttack.InAttack)
+            {
+                MoveTowards(m_Target.position.Vec2());
+            }
+        }
+
         public void Move(Vector2 position)
         {
             m_Rigidbody.MovePosition(position);
@@ -37,7 +61,10 @@
             float distance = Vector2.Distance(currentPosition, targetPosition);
 
             if (distance <= m_AttackRange)
+            {
+                TriggerAttack();
                 return;
+            }
 
             float maxStep = m_Speed * Time.fixedDeltaTime;
             float distanceToMove = distance - m_AttackRange;
@@ -49,9 +76,9 @@
             m_Rigidbody.MovePosition(nextMove);
         }
 
-        public void MoveForward()
+        private void TriggerAttack()
         {
-            return;
+            
         }
 
         public void TakeDamage(float damage)

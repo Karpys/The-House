@@ -1,25 +1,34 @@
 ﻿namespace Script
 {
-    using Behaviour;
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
-    public class BaseProjectile : MonoBehaviour,IController
+    public class BaseProjectile : MonoBehaviour
     {
         private float m_ProjectileSpeed = 0;
-        private IBehave m_ProjectileBehavior = null;
         private float m_Damage = 0;
-        
-        public void InitializeBaseProjectile(float damage,float projectileSpeed,IBehave projectileBehavior)
+        private Transform m_Target = null;
+        public void InitializeBaseProjectile(float damage,float projectileSpeed)
         {
             m_Damage = damage;
             m_ProjectileSpeed = projectileSpeed;
-            m_ProjectileBehavior = projectileBehavior;
         }
 
         private void FixedUpdate()
         {
-            m_ProjectileBehavior?.Behave();
+            Behave();
+        }
+
+        private void Behave()
+        {
+            if (!m_Target)
+            {
+                Debug.Log("Move Forward");
+                MoveForward();   
+                return;
+            }
+            
+            MoveTowards(m_Target.position);
         }
 
         public void Move(Vector2 position)
@@ -48,6 +57,11 @@
                 damageable.TakeDamage(m_Damage);
                 Destroy(gameObject);
             }
+        }
+
+        public void SetTarget(Transform target)
+        {
+            m_Target = target;
         }
     }
 
