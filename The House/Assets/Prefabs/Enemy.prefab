@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Script.Behaviour.Enemy
   m_Rigidbody: {fileID: -3037370260193299266}
-  m_Speed: 1000
+  m_Speed: 10
   m_Life: 10
   m_AttackRange: 0.575
 --- !u!50 &-3037370260193299266
