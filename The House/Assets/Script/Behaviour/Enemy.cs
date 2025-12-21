@@ -19,6 +19,7 @@
             IDamageable damageable = target.GetComponent<IDamageable>();
         }
     }
+    
     public class Enemy : MonoBehaviour,ITarget,IDamageable
     {
         [SerializeField] private Rigidbody2D m_Rigidbody = null;
