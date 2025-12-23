@@ -3,32 +3,22 @@
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
-    public class EnemyAttack
-    {
-        private bool m_InAttack = false;
-        private Enemy m_Enemy = null;
-        public bool InAttack => m_InAttack;
-        public EnemyAttack(Enemy enemy)
-        {
-            m_Enemy = enemy;
-        }
-
-        public void Attack(Transform target)
-        {
-            m_InAttack = true;
-            IDamageable damageable = target.GetComponent<IDamageable>();
-        }
-    }
-    
     public class Enemy : MonoBehaviour,ITarget,IDamageable
     {
         [SerializeField] private Rigidbody2D m_Rigidbody = null;
         [SerializeField] private float m_Speed = 5f;
         [SerializeField] private float m_Life = 10f;
         [SerializeField] private float m_AttackRange = 0.5f;
+        [SerializeField] private float m_ContactDamage = 1;
+
+        [SerializeField] private AnimationCurve m_AttackAnimationCurve = null;
+        [SerializeField] private float m_AttackDuration = 0.5f;
         
         public Transform Transform => transform;
         public Vector2 Position => transform.position.Vec2();
+        public float ContactDamage => m_ContactDamage;
+        public AnimationCurve AttackAnimationCurve => m_AttackAnimationCurve;
+        public float AttackDuration => m_AttackDuration;
 
         private EnemyAttack m_DefaultAttack = null;
         private Transform m_Target = null;
@@ -47,7 +37,7 @@
         {
             if (m_Target && !m_DefaultAttack.InAttack)
             {
-                MoveTowards(m_Target.position.Vec2());
+                MoveTowardsTarget(m_Target);
             }
         }
 
@@ -56,8 +46,9 @@
             m_Rigidbody.MovePosition(position);
         }
 
-        public void MoveTowards(Vector2 targetPosition)
+        public void MoveTowardsTarget(Transform target)
         {
+            Vector2 targetPosition = target.position.Vec2();
             Vector2 currentPosition = transform.position.Vec2();
             float distance = Vector2.Distance(currentPosition, targetPosition);
 
@@ -79,7 +70,10 @@
 
         private void TriggerAttack()
         {
+            if(m_DefaultAttack.InAttack)
+                return;
             
+            m_DefaultAttack.Attack(m_Target);
         }
 
         public void TakeDamage(float damage)
