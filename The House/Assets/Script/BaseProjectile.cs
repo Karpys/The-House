@@ -3,49 +3,25 @@
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
+
     public class BaseProjectile : MonoBehaviour
     {
         private float m_ProjectileSpeed = 0;
         private float m_Damage = 0;
-        private Transform m_Target = null;
-        public void InitializeBaseProjectile(float damage,float projectileSpeed)
+
+        private ProjectileLogic m_Logic = null;
+        public float ProjectileSpeed => m_ProjectileSpeed;
+
+        public void InitializeBaseProjectile(ProjectileLogic projectileLogic, float damage, float projectileSpeed)
         {
+            m_Logic = projectileLogic;
             m_Damage = damage;
             m_ProjectileSpeed = projectileSpeed;
         }
 
         private void FixedUpdate()
         {
-            Behave();
-        }
-
-        private void Behave()
-        {
-            if (!m_Target)
-            {
-                Debug.Log("Move Forward");
-                MoveForward();   
-                return;
-            }
-            
-            MoveTowards(m_Target.position);
-        }
-
-        public void Move(Vector2 position)
-        {
-            transform.position = position;
-        }
-
-        public void MoveTowards(Vector2 position)
-        {
-            Vector2 targetPosition = transform.position.Vec2() + (position - transform.position.Vec2()).normalized * (m_ProjectileSpeed * Time.fixedDeltaTime);
-            transform.position = targetPosition;
-        }
-
-        public void MoveForward()
-        {
-            Vector2 targetPosition = transform.position.Vec2() + transform.right.Vec2() * (m_ProjectileSpeed * Time.fixedDeltaTime);
-            transform.position = targetPosition;
+            m_Logic.Behave();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -59,9 +35,16 @@
             }
         }
 
-        public void SetTarget(Transform target)
+        private void SetAngleRotation(float angle)
         {
-            m_Target = target;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        public void RotateTowards(Vector2 position)
+        {
+            Vector2 direction = position - transform.position.Vec2();
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            SetAngleRotation(angle);
         }
     }
 

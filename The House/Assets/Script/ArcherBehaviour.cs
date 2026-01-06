@@ -79,11 +79,8 @@
         private void ShootTo(ITarget closestTarget)
         {
             BaseProjectile proj = Instantiate(m_ProjectilePrefab, transform.position, Quaternion.identity);
-            Vector2 direction = closestTarget.Position - proj.transform.position.Vec2();
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            proj.SetTarget(closestTarget.Transform);
-            proj.transform.rotation = Quaternion.Euler(0,0,angle);
-            proj.InitializeBaseProjectile(m_ProjectileDamage,m_ProjectileSpeed);
+            proj.RotateTowards(closestTarget.Transform.position.Vec2());
+            proj.InitializeBaseProjectile(new BaseProjectileLogic(closestTarget.Transform,proj), m_ProjectileDamage,m_ProjectileSpeed);
         }
     }
 }
