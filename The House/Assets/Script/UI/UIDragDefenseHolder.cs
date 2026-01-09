@@ -51,8 +51,8 @@
             m_ArrowIcon.DoRotate(new Vector3(0, 0, 180), 0.15f).SetMode(TweenMode.ADDITIVE);
             m_InDisplay = true;
         }
-        
-        private void Hide()
+
+        public void Hide()
         {
             m_Body.DoAnchorPosition(new Vector2(150, 0), 0.15f);
             m_ArrowIcon.DoRotate(new Vector3(0, 0, 180), 0.15f).SetMode(TweenMode.ADDITIVE);

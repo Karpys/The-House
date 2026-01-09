@@ -7,7 +7,6 @@
     public class UIDraggableToSceneController : MonoBehaviour
     {
         private DragState m_DragState = DragState.None; 
-        private DragState m_PreviousDragState = DragState.None;
 
         private DraggableToSceneState m_DraggableToSceneState = DraggableToSceneState.UI;
 
@@ -54,7 +53,6 @@
 
         public void Select(IUIDraggableToScene draggableToScene)
         {
-            m_PreviousDragState = DragState.Selection;
             m_DragState = DragState.Move;
             m_CurrentDraggable = draggableToScene;
         }

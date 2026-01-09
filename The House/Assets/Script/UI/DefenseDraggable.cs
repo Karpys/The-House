@@ -6,8 +6,9 @@
 
     public class DefenseDraggable : EventButtonPointer,IUIDraggableToScene
     {
+        [SerializeField] private UIDragDefenseHolder m_DragHolder = null;
         [SerializeField] private UIDraggableToSceneController m_Controller = null;
-        [SerializeField] private ArcherBehaviour m_DefenseToCreate = null;
+        [SerializeField] private BaseDefense m_DefenseToCreate = null;
         [SerializeField] private Transform m_ShadowPrefab;
         [SerializeField] private bool m_IsLock = false;
 
@@ -44,6 +45,7 @@
 
         public void OnScene()
         {
+            m_DragHolder.Hide();
             m_Shadow.gameObject.SetActive(true);
         }
 
@@ -57,6 +59,7 @@
             m_IsLock = true;
             m_Shadow.gameObject.SetActive(false);
             Instantiate(m_DefenseToCreate, PositionUtils.MouseToWorld(), Quaternion.identity);
+            gameObject.SetActive(false);
         }
     }
 }

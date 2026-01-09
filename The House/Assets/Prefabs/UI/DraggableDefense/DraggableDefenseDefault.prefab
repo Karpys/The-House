@@ -76,9 +76,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_ButtonFeedback: {fileID: 0}
+  m_DragHolder: {fileID: 0}
   m_Controller: {fileID: 0}
-  m_DefenseToCreate: {fileID: 1991270697405366516, guid: 91244136bd170384cb9c65165312c45d, type: 3}
+  m_DefenseToCreate: {fileID: 6161639048237030385, guid: ae4e8b8b510b23a47a3492de214de38e, type: 3}
   m_ShadowPrefab: {fileID: 556932369218734604, guid: ccc53f5b451e2c949b9eac977e19fa34, type: 3}
+  m_IsLock: 0
 --- !u!1 &5384381421687553271
 GameObject:
   m_ObjectHideFlags: 0

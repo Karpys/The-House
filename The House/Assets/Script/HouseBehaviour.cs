@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class HouseBehaviour : MonoBehaviour,IDamageable
+    public class HouseBehaviour : BaseDefense,IDamageable
     {
         [SerializeField] private float m_Life = 100;
         public void TakeDamage(float damage)

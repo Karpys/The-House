@@ -4,7 +4,7 @@
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
-    public class ArcherBehaviour : MonoBehaviour
+    public class ArcherBehaviour : BaseDefense
     {
         [SerializeField] private float m_Range = 1;
         [SerializeField] private CircleCollider2D m_RangeTrigger = null;

@@ -9,7 +9,14 @@ namespace Script
 
         public void UpdateRange(float range)
         {
-            m_Renderer.sharedMaterial.SetFloat("_Size",m_RangeBaseSize / range);
+            if (Application.isPlaying)
+            {
+                m_Renderer.material.SetFloat("_Size",m_RangeBaseSize / range);
+            }
+            else
+            {
+                m_Renderer.sharedMaterial.SetFloat("_Size",m_RangeBaseSize / range);
+            }
         }
     }
 }
