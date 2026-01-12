@@ -188,6 +188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1986079467814326759, guid: a45a1a1e962d1b345ba9305963393ecf, type: 3}
+      propertyPath: m_BaseDefense
+      value: 
+      objectReference: {fileID: 6161639048237030385}
     - target: {fileID: 6314819995806482731, guid: a45a1a1e962d1b345ba9305963393ecf, type: 3}
       propertyPath: m_Name
       value: Archer
@@ -274,13 +278,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b1198668bb4fc7817362026502d477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Script.ArcherBehaviour
-  m_Range: 2.5
+  m_DefenseInfo: {fileID: 11400000, guid: b260b7f00510fac43a1513192302df45, type: 2}
+  m_BaseRange: 2.5
   m_RangeTrigger: {fileID: 3888800490592948948}
   m_RangeVisualIndicator: {fileID: 5134224271057918811}
+  m_BaseProjectileDamage: 10
+  m_BaseProjectileSpeed: 10
+  m_BaseAttackSpeed: 1
+  m_ProjectilePrefab: {fileID: 6939513257241455983, guid: e790e153ebe05f04dab217270e068d57, type: 3}
   m_ProjectileDamage: 10
   m_ProjectileSpeed: 10
   m_AttackSpeed: 1
-  m_ProjectilePrefab: {fileID: 6939513257241455983, guid: e790e153ebe05f04dab217270e068d57, type: 3}
+  m_Range: 2.5
 --- !u!58 &3888800490592948948
 CircleCollider2D:
   m_ObjectHideFlags: 0

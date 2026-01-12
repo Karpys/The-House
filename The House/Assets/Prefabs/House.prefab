@@ -98,6 +98,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1986079467814326759, guid: a45a1a1e962d1b345ba9305963393ecf, type: 3}
+      propertyPath: m_BaseDefense
+      value: 
+      objectReference: {fileID: 422790714578021639}
     - target: {fileID: 6314819995806482731, guid: a45a1a1e962d1b345ba9305963393ecf, type: 3}
       propertyPath: m_Name
       value: House
@@ -175,4 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858cb63ab8204a07a55105534d79fce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Script.HouseBehaviour
+  m_DefenseInfo: {fileID: 11400000, guid: 0aa79c6e275262b4b986fa4abb1140f7, type: 2}
   m_Life: 100

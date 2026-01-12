@@ -1,27 +1,73 @@
 ﻿namespace Script
 {
+    using System.Collections.Generic;
     using Behaviour;
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
     public class ArcherBehaviour : BaseDefense
     {
-        [SerializeField] private float m_Range = 1;
+        private Dictionary<UpgradeType, Upgrade> m_Upgrades = new Dictionary<UpgradeType, Upgrade>();
+        
+        [SerializeField] private float m_BaseRange = 1;
         [SerializeField] private CircleCollider2D m_RangeTrigger = null;
         [SerializeField] private RangeVisualIndicator m_RangeVisualIndicator = null;
         
-        [Header("Damage")]
-        [SerializeField] private float m_ProjectileDamage = 10;
-        [SerializeField] private float m_ProjectileSpeed = 10;
-        [SerializeField] private float m_AttackSpeed = 1;
+        [Header("Base Stats")]
+        [SerializeField] private float m_BaseProjectileDamage = 10;
+        [SerializeField] private float m_BaseProjectileSpeed = 10;
+        [SerializeField] private float m_BaseAttackSpeed = 1;
         [SerializeField] private BaseProjectile m_ProjectilePrefab = null;
+
+        [Header("Stats")]
+        [SerializeField] private float m_ProjectileDamage = 0;
+        [SerializeField] private float m_ProjectileSpeed = 0;
+        [SerializeField] private float m_AttackSpeed = 0;
+        [SerializeField] private float m_Range = 0;
         
         private TargetSelector m_TargetSelector = new TargetSelector();
         private Clock m_ShootClock = null;
 
         private void Awake()
         {
-            m_ShootClock = new Clock(m_AttackSpeed, TryShoot);
+            m_ShootClock = new Clock(m_BaseAttackSpeed, TryShoot);
+            ApplyUpgrade();
+        }
+
+        private void ApplyUpgrade()
+        {
+            ApplyBaseValue();
+            foreach (KeyValuePair<UpgradeType,Upgrade> upgrade in m_Upgrades)
+            {
+                switch (upgrade.Key)
+                {
+                    case UpgradeType.PercentAttackSpeed:
+                        float attackRatio = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        m_AttackSpeed *= attackRatio;
+                        break;
+                    case UpgradeType.PercentDamage:
+                        float damageRatio = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        m_ProjectileDamage *= damageRatio;
+                        break;
+                    case UpgradeType.PercentRange:
+                        float percentRange = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        m_Range *= percentRange;
+                        break;
+                }
+            }
+        }
+
+        public void FetchUpgrade()
+        {
+            
+        }
+
+        private void ApplyBaseValue()
+        {
+            m_ProjectileDamage = m_BaseProjectileDamage;
+            m_AttackSpeed = m_BaseAttackSpeed;
+            m_ProjectileSpeed = m_BaseProjectileSpeed;
+            m_Range = m_BaseRange;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
