@@ -9,6 +9,8 @@
         [SerializeField] private string m_UpgradeName = String.Empty;
         [SerializeField] private string m_Description = String.Empty;
         [SerializeField] private int m_MaxLevel = 100;
+        
+        public string UpgradeName => m_UpgradeName;
 
         public float GetCost(int level)
         {

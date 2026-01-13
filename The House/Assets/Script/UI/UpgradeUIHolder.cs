@@ -14,7 +14,7 @@
         public void Initialize(BaseDefense defense, DefenseUpgrade upgrade)
         {
             m_CostText.text = upgrade.UpgradeScriptableObject.GetCost(upgrade.CurrentLevel).ToString();
-            m_UpgradeNameText.text = name;
+            m_UpgradeNameText.text = upgrade.UpgradeScriptableObject.UpgradeName;
             m_CurrentValueText.text = upgrade.GetCurrentValue();
             m_Defense = defense;
             m_DefenseUpgrade = upgrade;
