@@ -7,8 +7,6 @@
 
     public class ArcherBehaviour : BaseDefense
     {
-        private Dictionary<UpgradeType, Upgrade> m_Upgrades = new Dictionary<UpgradeType, Upgrade>();
-        
         [SerializeField] private float m_BaseRange = 1;
         [SerializeField] private CircleCollider2D m_RangeTrigger = null;
         [SerializeField] private RangeVisualIndicator m_RangeVisualIndicator = null;
@@ -28,13 +26,14 @@
         private TargetSelector m_TargetSelector = new TargetSelector();
         private Clock m_ShootClock = null;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_ShootClock = new Clock(m_BaseAttackSpeed, TryShoot);
             ApplyUpgrade();
         }
 
-        private void ApplyUpgrade()
+        protected override void ApplyUpgrade()
         {
             ApplyBaseValue();
             foreach (KeyValuePair<UpgradeType,Upgrade> upgrade in m_Upgrades)
@@ -55,11 +54,6 @@
                         break;
                 }
             }
-        }
-
-        public void FetchUpgrade()
-        {
-            
         }
 
         private void ApplyBaseValue()

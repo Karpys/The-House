@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745271454163701355}
+  - component: {fileID: 4985448694453842997}
   m_Layer: 5
   m_Name: UpgradeHolder
   m_TagString: Untagged
@@ -39,6 +40,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4985448694453842997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394595015782472423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20feaaf9f3ef4d068b7a845e5440455d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Script.UI.UpgradeUIHolder
+  m_CostText: {fileID: 971871620781029269}
+  m_UpgradeNameText: {fileID: 5860866892846800690}
+  m_CurrentValueText: {fileID: 666790629557551036}
 --- !u!1 &3048660337124425354
 GameObject:
   m_ObjectHideFlags: 0
@@ -51,7 +67,7 @@ GameObject:
   - component: {fileID: 2899942654370101785}
   - component: {fileID: 666790629557551036}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +277,7 @@ GameObject:
   - component: {fileID: 5943679719313192043}
   - component: {fileID: 971871620781029269}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -471,6 +487,7 @@ GameObject:
   - component: {fileID: 4066687032322086787}
   - component: {fileID: 6639093607406339773}
   - component: {fileID: 2458536363976040643}
+  - component: {fileID: 977588572465432162}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -535,6 +552,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
+--- !u!114 &977588572465432162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183018363221397138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5522ef647314e8a9a53fb8fade5d142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Script.UI.UpgradeButton
+  m_UIHolder: {fileID: 4985448694453842997}
 --- !u!1 &7731129889980996709
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +652,7 @@ GameObject:
   - component: {fileID: 8243482728571943640}
   - component: {fileID: 5860866892846800690}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

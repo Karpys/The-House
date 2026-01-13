@@ -278,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b1198668bb4fc7817362026502d477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Script.ArcherBehaviour
+  m_UpgradeScriptableObjects:
+  - {fileID: 11400000, guid: e3cd7d74ee4a65149bbec223d867727b, type: 2}
   m_DefenseInfo: {fileID: 11400000, guid: b260b7f00510fac43a1513192302df45, type: 2}
   m_BaseRange: 2.5
   m_RangeTrigger: {fileID: 3888800490592948948}
