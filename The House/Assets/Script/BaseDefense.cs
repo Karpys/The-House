@@ -1,5 +1,6 @@
 ﻿namespace Script
 {
+    using System;
     using System.Collections.Generic;
     using Data;
     using UnityEngine;
@@ -11,6 +12,7 @@
         [SerializeField] private DefenseInfoScriptableObject m_DefenseInfo = null;
 
         protected Dictionary<UpgradeType, Upgrade> m_Upgrades = new Dictionary<UpgradeType, Upgrade>();
+        protected Dictionary<string, Func<string>> m_DefenseValues = new Dictionary<string, Func<string>>();
         protected DefenseUpgrade[] m_DefenseUpgrades = null;
 
         public DefenseInfoScriptableObject DefenseInfo => m_DefenseInfo;
@@ -57,6 +59,16 @@
         protected virtual void ApplyUpgrade()
         {
             return;
+        }
+
+        public string GetValue(string defenseValueName)
+        {
+            if (m_DefenseValues.ContainsKey(defenseValueName))
+            {
+                return m_DefenseValues[defenseValueName].Invoke();
+            }
+
+            return "Not implemented";
         }
     }
 }

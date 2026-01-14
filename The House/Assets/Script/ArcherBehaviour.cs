@@ -30,6 +30,7 @@
         {
             base.Awake();
             m_ShootClock = new Clock(m_BaseAttackSpeed, TryShoot);
+            InitializeDefenseValues();
             ApplyUpgrade();
         }
 
@@ -62,6 +63,11 @@
             m_AttackSpeed = m_BaseAttackSpeed;
             m_ProjectileSpeed = m_BaseProjectileSpeed;
             m_Range = m_BaseRange;
+        }
+
+        private void InitializeDefenseValues()
+        {
+            m_DefenseValues.Add("Range",() => m_Range.ToString());
         }
 
         private void OnTriggerEnter2D(Collider2D other)

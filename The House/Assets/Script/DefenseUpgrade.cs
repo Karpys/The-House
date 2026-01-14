@@ -20,10 +20,5 @@
         {
             defense.AddUpgrade(m_UpgradeScriptableObject.GetUpgrade());
         }
-
-        public string GetCurrentValue()
-        {
-            return "Current Value";
-        }
     }
 }

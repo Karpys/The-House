@@ -15,4 +15,5 @@ MonoBehaviour:
   m_UpgradeName: Range
   m_Description: Upgrade the range of the defense
   m_MaxLevel: 100
+  m_TargetValueName: Range
   m_UpgradeType: 2
