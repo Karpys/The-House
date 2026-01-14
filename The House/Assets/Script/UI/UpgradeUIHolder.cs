@@ -13,7 +13,7 @@
         private DefenseUpgrade m_DefenseUpgrade = null;
         public void Initialize(BaseDefense defense, DefenseUpgrade upgrade)
         {
-            m_CostText.text = upgrade.UpgradeScriptableObject.GetCost(upgrade.CurrentLevel).ToString() + "€";
+            m_CostText.text = upgrade.UpgradeScriptableObject.GetCost(upgrade.CurrentLevel)+ "€";
             m_UpgradeNameText.text = upgrade.UpgradeScriptableObject.UpgradeName;
             m_CurrentValueText.text = defense.GetValue(upgrade.UpgradeScriptableObject.TargetValueName);
             m_Defense = defense;
@@ -23,6 +23,7 @@
         public void TryUpgrade()
         {
             m_DefenseUpgrade.ApplyUpgrade(m_Defense);
+            Initialize(m_Defense, m_DefenseUpgrade);
         }
     }
 }

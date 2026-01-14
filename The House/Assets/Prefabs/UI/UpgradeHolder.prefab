@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -487,7 +487,6 @@ GameObject:
   - component: {fileID: 4066687032322086787}
   - component: {fileID: 6639093607406339773}
   - component: {fileID: 2458536363976040643}
-  - component: {fileID: 977588572465432162}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -536,7 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -552,19 +551,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
---- !u!114 &977588572465432162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7183018363221397138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5522ef647314e8a9a53fb8fade5d142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Script.UI.UpgradeButton
-  m_UIHolder: {fileID: 4985448694453842997}
 --- !u!1 &7731129889980996709
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,6 +562,7 @@ GameObject:
   - component: {fileID: 1623133967033605338}
   - component: {fileID: 9220889985138204409}
   - component: {fileID: 8036492748805248245}
+  - component: {fileID: 4845159752481814680}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -640,6 +627,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
+--- !u!114 &4845159752481814680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731129889980996709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5522ef647314e8a9a53fb8fade5d142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Script.UI.UpgradeButton
+  m_UIHolder: {fileID: 4985448694453842997}
 --- !u!1 &8450246551000501887
 GameObject:
   m_ObjectHideFlags: 0

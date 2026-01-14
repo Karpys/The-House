@@ -18,6 +18,7 @@
 
         public void ApplyUpgrade(BaseDefense defense)
         {
+            m_CurrentLevel++;
             defense.AddUpgrade(m_UpgradeScriptableObject.GetUpgrade());
         }
     }

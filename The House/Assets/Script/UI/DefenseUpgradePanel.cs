@@ -1,10 +1,15 @@
 ﻿namespace Script.UI
 {
+    using System.Collections;
+    using KarpysDev.KarpysUtils.TweenCustom;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
     public class DefenseUpgradePanel : MonoBehaviour
     {
+        [SerializeField] private RectTransform m_Body = null;
+        [SerializeField] private RectTransform m_PanelRect = null;
+        [SerializeField] private ContentSizeFitter m_ContentSizeFitter = null;
         [SerializeField] private Image m_DefenseIcon = null;
         [SerializeField] private TMP_Text m_DefenseName = null;
         [SerializeField] private UpgradeUIHolder[] m_UpgradeUIHolders = null;
@@ -21,6 +26,24 @@
                 m_UpgradeUIHolders[i].Initialize(defense,defenseUpgrades[i]);
                 m_UpgradeUIHolders[i].gameObject.SetActive(true);
             }
+
+            for (int i = defenseUpgrades.Length; i < m_UpgradeUIHolders.Length; i++)
+            {
+                m_UpgradeUIHolders[i].gameObject.SetActive(false);
+            }
+
+            StartCoroutine(CO_Display());
+        }
+
+        private IEnumerator CO_Display()
+        {
+            yield return new WaitForSeconds(0.02f);
+            Display();
+        }
+        
+        private void Display()
+        {
+            m_Body.DoUIPosition(new Vector3(0, m_PanelRect.sizeDelta.y,0), 0.25f);
         }
     }
 }
