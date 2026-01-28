@@ -13,16 +13,10 @@
             m_Value = value;
             m_UpgradeType = type;
         }
-        
-        public void ApplyUpgrade(BaseDefense defense,string value)
-        {
-            switch (m_UpgradeType)
-            {
-                case UpgradeType.PercentRange:
-                    defense.AddUpgrade(new Upgrade(UpgradeType.PercentRange, value));
-                    break;
-            }
-        }
 
+        public void SetValue(string value)
+        {
+            m_Value = value;
+        }
     }
 }

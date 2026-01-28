@@ -11,12 +11,12 @@
         [SerializeField] private UpgradeScriptableObject[] m_UpgradeScriptableObjects = null;
         [SerializeField] private DefenseInfoScriptableObject m_DefenseInfo = null;
 
-        protected Dictionary<UpgradeType, Upgrade> m_Upgrades = new Dictionary<UpgradeType, Upgrade>();
+        protected List<Upgrade> m_Upgrades = new List<Upgrade>();
         protected Dictionary<string, Func<string>> m_DefenseValues = new Dictionary<string, Func<string>>();
         protected DefenseUpgrade[] m_DefenseUpgrades = null;
 
         public DefenseInfoScriptableObject DefenseInfo => m_DefenseInfo;
-        public Dictionary<UpgradeType, Upgrade> Upgrades => m_Upgrades;
+        public List<Upgrade> Upgrades => m_Upgrades;
 
         protected virtual void Awake()
         {
@@ -38,22 +38,9 @@
             return m_DefenseUpgrades;
         }
 
-        public void AddUpgrade(Upgrade upgrade,bool reload = true)
+        public void AddUpgrade(Upgrade upgrade)
         {
-            if (m_Upgrades.ContainsKey(upgrade.UpgradeType))
-            {
-                //Sum upgrade
-            }
-            else
-            {
-                m_Upgrades.Add(upgrade.UpgradeType,upgrade);
-            }
-
-            if (reload)
-            {
-                ApplyUpgrade();
-            }
-                
+            m_Upgrades.Add(upgrade);
         }
 
         protected virtual void ApplyUpgrade()
@@ -69,6 +56,11 @@
             }
 
             return "Not implemented";
+        }
+
+        public void Reload()
+        {
+            ApplyUpgrade();
         }
     }
 }

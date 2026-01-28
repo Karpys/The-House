@@ -37,7 +37,8 @@
 
         private IEnumerator CO_Display()
         {
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             Display();
         }
         

@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 361c9333231c47a7ae1db1901dbd9514, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d9e94252a684090a837d094b537e6c7, type: 3}
   m_Name: RangeUpgrade
-  m_EditorClassIdentifier: Assembly-CSharp::Script.Data.TypeUpgradeScriptableObject
+  m_EditorClassIdentifier: Assembly-CSharp::Script.Data.FloatTypeUpgradeScriptableObject
   m_UpgradeName: Range
-  m_Description: Upgrade the range of the defense
+  m_Description: Maxium Attack Range
   m_MaxLevel: 100
   m_TargetValueName: Range
   m_CostCurve:
@@ -42,3 +42,28 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_MinMaxCost: {x: 10, y: 100}
   m_UpgradeType: 2
+  m_ValueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_MinMaxValue: {x: 0, y: 100}

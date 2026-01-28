@@ -12,7 +12,7 @@
             return "10";
         }
 
-        public override Upgrade GetUpgrade()
+        public override Upgrade GetUpgrade(int level)
         {
             return new Upgrade(m_UpgradeType, GetValue());
         }

@@ -37,20 +37,25 @@
         protected override void ApplyUpgrade()
         {
             ApplyBaseValue();
-            foreach (KeyValuePair<UpgradeType,Upgrade> upgrade in m_Upgrades)
+
+            //Need to correctly summs linear values
+            // Exemple :
+            // Two +10% range => 100 * 1.1 => 110 * 1.1 => 121 != 120
+            // Need Design Balance and Choice
+            foreach (Upgrade upgrade in m_Upgrades)
             {
-                switch (upgrade.Key)
+                switch (upgrade.UpgradeType)
                 {
                     case UpgradeType.PercentAttackSpeed:
-                        float attackRatio = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        float attackRatio = 1 + upgrade.Value.ToFloat() / 100;
                         m_AttackSpeed *= attackRatio;
                         break;
                     case UpgradeType.PercentDamage:
-                        float damageRatio = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        float damageRatio = 1 + upgrade.Value.ToFloat() / 100;
                         m_ProjectileDamage *= damageRatio;
                         break;
                     case UpgradeType.PercentRange:
-                        float percentRange = 1 + upgrade.Value.Value.ToFloat() / 100;
+                        float percentRange = 1 + upgrade.Value.ToFloat() / 100;
                         m_Range *= percentRange;
                         break;
                 }
