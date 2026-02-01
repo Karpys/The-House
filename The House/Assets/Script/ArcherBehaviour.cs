@@ -17,11 +17,13 @@
         [SerializeField] private float m_BaseAttackSpeed = 1;
         [SerializeField] private BaseProjectile m_ProjectilePrefab = null;
 
-        [Header("Stats")]
-        [SerializeField] private float m_ProjectileDamage = 0;
-        [SerializeField] private float m_ProjectileSpeed = 0;
-        [SerializeField] private float m_AttackSpeed = 0;
-        [SerializeField] private float m_Range = 0;
+        [Header("MultiShoot")]
+        [SerializeField] private float m_MultiShootPercentChance = 0f;
+
+        private float m_ProjectileDamage = 0;
+        private float m_ProjectileSpeed = 0;
+        private float m_AttackSpeed = 20;
+        private float m_Range = 0;
         
         private TargetSelector m_TargetSelector = new TargetSelector();
         private Clock m_ShootClock = null;
@@ -29,7 +31,7 @@
         protected override void Awake()
         {
             base.Awake();
-            m_ShootClock = new Clock(m_BaseAttackSpeed, TryShoot);
+            m_ShootClock = new Clock(1/m_BaseAttackSpeed, TryShoot);
             InitializeDefenseValues();
             ApplyUpgrade();
         }
@@ -73,6 +75,7 @@
         private void InitializeDefenseValues()
         {
             m_DefenseValues.Add("Range",() => m_Range.ToString());
+            m_DefenseValues.Add("Attack Speed",() => m_AttackSpeed.ToString());
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -119,7 +122,7 @@
             if (closestTarget != null)
             {
                 ShootTo(closestTarget);
-                m_ShootClock.Restart(m_AttackSpeed);
+                m_ShootClock.Restart(1/m_AttackSpeed);
             }
             else
             {

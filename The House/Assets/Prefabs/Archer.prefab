@@ -280,18 +280,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Script.ArcherBehaviour
   m_UpgradeScriptableObjects:
   - {fileID: 11400000, guid: e3cd7d74ee4a65149bbec223d867727b, type: 2}
+  - {fileID: 11400000, guid: 6d41ed66344902449b13c12692745978, type: 2}
   m_DefenseInfo: {fileID: 11400000, guid: b260b7f00510fac43a1513192302df45, type: 2}
   m_BaseRange: 2.5
   m_RangeTrigger: {fileID: 3888800490592948948}
   m_RangeVisualIndicator: {fileID: 5134224271057918811}
-  m_BaseProjectileDamage: 10
+  m_BaseProjectileDamage: 1
   m_BaseProjectileSpeed: 10
   m_BaseAttackSpeed: 1
   m_ProjectilePrefab: {fileID: 6939513257241455983, guid: e790e153ebe05f04dab217270e068d57, type: 3}
-  m_ProjectileDamage: 10
-  m_ProjectileSpeed: 10
-  m_AttackSpeed: 1
-  m_Range: 2.5
+  m_MultiShootPercentChance: 0
 --- !u!58 &3888800490592948948
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -327,7 +325,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2.5
+  m_Radius: 0.0001
 --- !u!1001 &8895766515186217455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,15 +340,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8021215714939440733, guid: 8d9e7aecef3350843b21a1fd58061d23, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021215714939440733, guid: 8d9e7aecef3350843b21a1fd58061d23, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021215714939440733, guid: 8d9e7aecef3350843b21a1fd58061d23, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8021215714939440733, guid: 8d9e7aecef3350843b21a1fd58061d23, type: 3}
       propertyPath: m_LocalPosition.x
