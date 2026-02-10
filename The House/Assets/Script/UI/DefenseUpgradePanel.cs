@@ -9,7 +9,6 @@
     {
         [SerializeField] private RectTransform m_Body = null;
         [SerializeField] private RectTransform m_PanelRect = null;
-        [SerializeField] private ContentSizeFitter m_ContentSizeFitter = null;
         [SerializeField] private Image m_DefenseIcon = null;
         [SerializeField] private TMP_Text m_DefenseName = null;
         [SerializeField] private UpgradeUIHolder[] m_UpgradeUIHolders = null;
