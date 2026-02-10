@@ -2453,7 +2453,7 @@ MonoBehaviour:
   m_CenterPosition: {fileID: 1835996152}
   m_EnemyPrefab: {fileID: 2741610646689191854, guid: 55570f6c3545a3d40b5eec1f86af510a, type: 3}
   m_SpawnDelay: 1
-  m_SpawnCount: 100
+  m_SpawnCount: 5
   m_SpawnRange: 10
 --- !u!1 &1717561672
 GameObject:

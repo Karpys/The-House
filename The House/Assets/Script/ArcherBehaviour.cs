@@ -19,11 +19,13 @@
 
         [Header("MultiShoot")]
         [SerializeField] private float m_MultiShootPercentChance = 0f;
-
-        private float m_ProjectileDamage = 0;
-        private float m_ProjectileSpeed = 0;
-        private float m_AttackSpeed = 20;
-        private float m_Range = 0;
+        [SerializeField] private int m_MultiShootCount = 2;
+        
+        [Header("Computed Stats / Useless to change in prefab mode")]
+        [SerializeField] private float m_ProjectileDamage = 0;
+        [SerializeField] private float m_ProjectileSpeed = 0;
+        [SerializeField] private float m_AttackSpeed = 20;
+        [SerializeField] private float m_Range = 0;
         
         private TargetSelector m_TargetSelector = new TargetSelector();
         private Clock m_ShootClock = null;
@@ -101,6 +103,7 @@
         private void FixedUpdate()
         {
             m_ShootClock?.FixedUpdateClock();
+            m_TargetSelector.SelectMultiple(m_MultiShootCount);
         }
         
         private void OnDrawGizmos()
@@ -116,6 +119,49 @@
         }
         
         private void TryShoot()
+        {
+            if (IsMultiShot())
+            {
+                MultiShot();
+            }
+            else
+            {
+                SingleShot();
+            }
+        }
+
+        private bool IsMultiShot()
+        {
+            return FloatUtils.PercentChance(m_MultiShootPercentChance);
+        }
+        
+        private void MultiShot()
+        {
+            List<ITarget> targets = m_TargetSelector.SelectMultipleClosest(transform.position.Vec2(), m_MultiShootCount);
+
+            if (targets == null)
+            {
+                m_ShootClock.Restart(0f);
+                return;
+            }
+            
+            foreach (ITarget target in targets)
+            {
+                if(target != null)
+                    ShootTo(target);
+            }
+
+            if (targets.Count > 0)
+            {
+                m_ShootClock.Restart(1/m_AttackSpeed);
+            }
+            else
+            {
+                m_ShootClock.Restart(0f);
+            }
+        }
+
+        private void SingleShot()
         {
             ITarget closestTarget = m_TargetSelector.SelectClosest(transform.position.Vec2());
 

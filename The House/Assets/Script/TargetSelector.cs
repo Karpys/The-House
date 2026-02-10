@@ -1,7 +1,10 @@
 ﻿namespace Script
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Behaviour;
+    using KarpysDev.KarpysUtils;
+    using NUnit.Framework;
     using UnityEngine;
 
     public class TargetSelector
@@ -45,6 +48,136 @@
             }
 
             return closest;
+        }
+
+        private List<int> m_CachedResults = new List<int>();
+        private List<float> m_CachedDistance = new List<float>();
+        public List<ITarget> SelectMultipleClosest(Vector2 position, int count)
+        {
+            if (m_Targetables.Count == 0)
+                return null;
+            
+            m_CachedResults.Clear();
+            m_CachedDistance.Clear();
+            
+            float worseDistance = 0;
+            int worseId = 0;
+
+            for (int i = 0; i < m_Targetables.Count; i++)
+            {
+                if (m_Targetables[i] == null)
+                {
+                    m_Targetables.RemoveAt(i);
+                    i--;
+                    continue;
+                }
+
+                float distance = Vector2.Distance(m_Targetables[i].Position, position);
+                m_CachedDistance.Add(distance);
+
+                if (m_CachedResults.Count < count)
+                {
+                    m_CachedResults.Add(i);
+
+                    if (distance > worseDistance)
+                    {
+                        worseDistance = distance;
+                        worseId = i;
+                    }
+                }
+                else
+                {
+                    //New result / replace worseDistance and worseId
+                    if (distance < worseDistance)
+                    {
+                        m_CachedResults[worseId] = i;
+
+                        int tempWorseId = 0;
+                        float tempWorseDistance = m_CachedDistance[m_CachedResults[0]];
+                        
+                        for (int j = 1; j < m_CachedResults.Count; j++)
+                        {
+                            if (m_CachedDistance[m_CachedResults[j]] > tempWorseDistance)
+                            {
+                                tempWorseId = j;
+                                tempWorseDistance = m_CachedDistance[tempWorseId];
+                            }
+                        }
+
+                        worseDistance = tempWorseDistance;
+                        worseId = tempWorseId;
+                    }
+                }
+            }
+
+            List<ITarget> result = new List<ITarget>();
+
+            foreach (int cachedResult in m_CachedResults)
+            {
+                result.Add(m_Targetables[cachedResult]);
+            }
+
+            return result;
+        }
+        
+        //Test
+        public void SelectMultiple(int count)
+        {
+            List<int> newList = new List<int>();
+            newList.Add(13);
+            newList.Add(5);
+            newList.Add(8);
+            newList.Add(75);
+            newList.Add(1);
+            newList.Add(6);
+            
+            m_CachedResults.Clear();
+            m_CachedDistance.Clear();
+            
+            float worseDistance = 0;
+            int worseId = 0;
+
+            for (int i = 0; i < newList.Count; i++)
+            {
+                m_CachedDistance.Add(newList[i]);
+
+                if (m_CachedResults.Count < count)
+                {
+                    m_CachedResults.Add(i);
+
+                    if (newList[i] > worseDistance)
+                    {
+                        worseDistance = newList[i];
+                        worseId = i;
+                    }
+                }
+                else
+                {
+                    //New result / replace worseDistance and worseId
+                    if (newList[i] < worseDistance)
+                    {
+                        m_CachedResults[worseId] = i;
+
+                        int tempWorseId = 0;
+                        float tempWorseDistance = m_CachedDistance[m_CachedResults[0]];
+                        
+                        for (int j = 1; j < m_CachedResults.Count; j++)
+                        {
+                            if (m_CachedDistance[m_CachedResults[j]] > tempWorseDistance)
+                            {
+                                tempWorseId = j;
+                                tempWorseDistance = m_CachedDistance[tempWorseId];
+                            }
+                        }
+
+                        worseDistance = tempWorseDistance;
+                        worseId = tempWorseId;
+                    }
+                }
+            }
+            
+            newList.LogList();
+            m_CachedResults.LogList();
         }
     }
 }
