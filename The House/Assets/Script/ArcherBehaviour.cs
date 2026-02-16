@@ -5,6 +5,35 @@
     using KarpysDev.KarpysUtils;
     using UnityEngine;
 
+    public class CriticalModule
+    {
+        private float m_CritChance = 0f;
+        private float m_CriticalMultiplier = 0f;
+
+        public float CriticalMultiplier => m_CriticalMultiplier;
+
+        public CriticalModule(float critChance, float criticalMultiplier)
+        {
+            m_CritChance = critChance;
+            m_CriticalMultiplier = criticalMultiplier;
+        }
+
+        public void SetCriticalChance(float critChance)
+        {
+            m_CritChance = critChance;
+        }
+
+        public void SetCriticalMultiplier(float critMultiplier)
+        {
+            m_CriticalMultiplier = critMultiplier;
+        }
+        
+        private bool IsCritical()
+        {
+            return FloatUtils.PercentChance(m_CritChance);
+        }
+    }
+    
     public class ArcherBehaviour : BaseDefense
     {
         [SerializeField] private float m_BaseRange = 1;
@@ -16,6 +45,8 @@
         [SerializeField] private float m_BaseProjectileSpeed = 10;
         [SerializeField] private float m_BaseAttackSpeed = 1;
         [SerializeField] private BaseProjectile m_ProjectilePrefab = null;
+        [SerializeField] private float m_BaseCriticalChance = 0;
+        [SerializeField] private float m_BaseCriticalMultiplier = 2;
 
         [Header("MultiShoot")]
         [SerializeField] private float m_MultiShootPercentChance = 0f;
