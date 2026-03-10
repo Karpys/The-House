@@ -134,7 +134,6 @@
         private void FixedUpdate()
         {
             m_ShootClock?.FixedUpdateClock();
-            m_TargetSelector.SelectMultiple(m_MultiShootCount);
         }
         
         private void OnDrawGizmos()
